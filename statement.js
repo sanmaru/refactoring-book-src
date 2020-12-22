@@ -34,14 +34,21 @@ function statement(invoice, plays){
         totalAmount += amountFor(perf);
     }
 
-    for ( let perf of invoice.performances ){
-        // 포인트를 정립한다.
-        volumeCredits += volumeCreditsFor(perf);
-    }
+    // 포인트를 정립한다.
+    volumeCredits += totalVolumeCredits(invoice);
 
     result += `총액 : ${usd(totalAmount)}\n`; // usd(totalAmount/100) -> usd(totalAmount)
     result += `적립 포인트 : ${volumeCredits}점\n`;
     return result;
+}
+
+function totalVolumeCredits(invoice){
+    let volumeCredits = 0;
+    for ( let perf of invoice.performances ){
+        // 포인트를 정립한다.
+        volumeCredits += volumeCreditsFor(perf);
+    }
+    return volumeCredits;
 }
 
 function usd(aNumber){

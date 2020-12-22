@@ -34,7 +34,7 @@ function statement(invoice, plays){
                         ).format;
     
     for ( let perf of invoice.performances ){
-        let thisAmount = amountFor(perf, playFor(perf));   // 변수 인라인하기 const play = playFor(perf)
+        let thisAmount = amountFor(perf, playFor(perf));   // 미사용 파라미터 삭제 amountFor(perf, playFor(perf)) -> amountFor(perf)
         // 포인트를 정립한다.
         volumeCredits += Math.max(perf.audience - 30, 0);
 
@@ -55,7 +55,7 @@ function playFor(aPerformance){
     return plays[aPerformance.playID];
 }
 
-function amountFor(aPerformance, play){  // perf 를 aPerformance 로 변경하여 보다 명확하게 변경
+function amountFor(aPerformance){  // perf 를 aPerformance 로 변경하여 보다 명확하게 변경
     let result = 0;
 
     switch(playFor(aPerformance).type){                  // play 는 playFor(perf). 즉, playFor(aPerformance) 한 값으로 play.type = playFor(aPerformance).type 이다

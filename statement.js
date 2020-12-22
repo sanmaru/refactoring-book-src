@@ -34,7 +34,6 @@ function statement(invoice, plays){
                         ).format;
     
     for ( let perf of invoice.performances ){
-        let thisAmount = amountFor(perf);   // 미사용 파라미터 삭제 amountFor(perf, playFor(perf)) -> amountFor(perf)
         // 포인트를 정립한다.
         volumeCredits += Math.max(perf.audience - 30, 0);
 
@@ -42,8 +41,8 @@ function statement(invoice, plays){
         if ("comedy" === playFor(perf).type ) volumeCredits += Math.floor(perf.audience/5); // 변수 인라인하기 play.type -> playFor(perf).type
 
         // 청구 내역을 출력한다.
-        result += ` ${playFor(perf).name}: ${format(thisAmount/100)} (${perf.audience}석)\n`;  // 변수 인라인하기 play.name -> playFor(perf).name
-        totalAmount += thisAmount;
+        result += ` ${playFor(perf).name}: ${format(amountFor(perf)/100)} (${perf.audience}석)\n`;  // 변수 인라인하기 play.name -> playFor(perf).name
+        totalAmount += amountFor(perf);
     }
 
     result += `총액 : ${format(totalAmount/100)}\n`;

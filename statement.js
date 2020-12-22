@@ -58,7 +58,7 @@ function playFor(aPerformance){
 function amountFor(aPerformance, play){  // perf 를 aPerformance 로 변경하여 보다 명확하게 변경
     let result = 0;
 
-    switch(play.type){
+    switch(playFor(aPerformance).type){                  // play 는 playFor(perf). 즉, playFor(aPerformance) 한 값으로 play.type = playFor(aPerformance).type 이다
         case "tragedy": //비극
             result = 40000;
             if (aPerformance.audience > 30){
@@ -73,7 +73,7 @@ function amountFor(aPerformance, play){  // perf 를 aPerformance 로 변경하�
             result += 300 * aPerformance.audience;
             break;
         default:
-            throw new Error(`알 수 없는 장르 : ${play.type}`)
+            throw new Error(`알 수 없는 장르 : ${playFor(aPerformance).type}`)  // play -> playFor(aPerformance)
     }
     return result;
 }

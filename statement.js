@@ -31,26 +31,26 @@ function statement(invoice, plays){
         result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience}석)\n`;  // usd(amountFor(perf)/100) -> usd(amountFor(perf))
     }
 
-    result += `총액 : ${usd(appleSauce(invoice))}\n`; // usd(totalAmount/100) -> usd(totalAmount)
+    result += `총액 : ${usd(totalAmount(invoice))}\n`; // usd(totalAmount/100) -> usd(totalAmount)
     result += `적립 포인트 : ${totalVolumeCredits(invoice)}점\n`;
     return result;
 }
 
-function appleSauce(invoice){
-    let totalAmount = 0;
+function totalAmount(invoice){
+    let result = 0;
     for ( let perf of invoice.performances ){
         totalAmount += amountFor(perf);
     }
-    return totalAmount;
+    return result;
 }
 
 function totalVolumeCredits(invoice){
-    let volumeCredits = 0;
+    let result = 0;
     for ( let perf of invoice.performances ){
         // 포인트를 정립한다.
-        volumeCredits += volumeCreditsFor(perf);
+        result += volumeCreditsFor(perf);
     }
-    return volumeCredits;
+    return result;
 }
 
 function usd(aNumber){
@@ -62,14 +62,14 @@ function usd(aNumber){
 }
 
 function volumeCreditsFor(aPerformance){
-    let volumeCredits = 0;
+    let result = 0;
     // 포인트를 정립한다.
-    volumeCredits += Math.max(aPerformance.audience - 30, 0);
+    result += Math.max(aPerformance.audience - 30, 0);
 
     // 희극 관객 5명마다 추가 포인트를 제공한다.
-    if ("comedy" === playFor(aPerformance).type ) volumeCredits += Math.floor(aPerformance.audience/5);
+    if ("comedy" === playFor(aPerformance).type ) result += Math.floor(aPerformance.audience/5);
 
-    return volumeCredits;
+    return result;
 }
 
 function playFor(aPerformance){

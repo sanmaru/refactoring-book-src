@@ -33,11 +33,11 @@ function statement(invoice, plays){
         volumeCredits += volumeCreditsFor(perf); // 포인트 정립함수 추출
 
         // 청구 내역을 출력한다.
-        result += ` ${playFor(perf).name}: ${usd(amountFor(perf)/100)} (${perf.audience}석)\n`;  // 변수 인라인하기 play.name -> playFor(perf).name
+        result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience}석)\n`;  // usd(amountFor(perf)/100) -> usd(amountFor(perf))
         totalAmount += amountFor(perf);
     }
 
-    result += `총액 : ${usd(totalAmount/100)}\n`;
+    result += `총액 : ${usd(totalAmount)}\n`; // usd(totalAmount/100) -> usd(totalAmount)
     result += `적립 포인트 : ${volumeCredits}점\n`;
     return result;
 }
@@ -47,7 +47,7 @@ function usd(aNumber){
                 { style: "currency"
                     , currency:"USB"
                     , minimumFractionDigits: 2}
-                ).format(aNumber);
+                ).format(aNumber/100); // 단위 변환 로직 추가
 }
 
 function volumeCreditsFor(aPerformance){

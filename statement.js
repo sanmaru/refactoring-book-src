@@ -34,7 +34,7 @@ function statement(invoice, plays){
                         ).format;
     
     for ( let perf of invoice.performances ){
-        let thisAmount = amountFor(perf, playFor(perf));   // 미사용 파라미터 삭제 amountFor(perf, playFor(perf)) -> amountFor(perf)
+        let thisAmount = amountFor(perf);   // 미사용 파라미터 삭제 amountFor(perf, playFor(perf)) -> amountFor(perf)
         // 포인트를 정립한다.
         volumeCredits += Math.max(perf.audience - 30, 0);
 

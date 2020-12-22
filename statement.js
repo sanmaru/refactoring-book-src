@@ -33,16 +33,16 @@ function statement(invoice, plays){
         volumeCredits += volumeCreditsFor(perf); // 포인트 정립함수 추출
 
         // 청구 내역을 출력한다.
-        result += ` ${playFor(perf).name}: ${format(amountFor(perf)/100)} (${perf.audience}석)\n`;  // 변수 인라인하기 play.name -> playFor(perf).name
+        result += ` ${playFor(perf).name}: ${usd(amountFor(perf)/100)} (${perf.audience}석)\n`;  // 변수 인라인하기 play.name -> playFor(perf).name
         totalAmount += amountFor(perf);
     }
 
-    result += `총액 : ${format(totalAmount/100)}\n`;
+    result += `총액 : ${usd(totalAmount/100)}\n`;
     result += `적립 포인트 : ${volumeCredits}점\n`;
     return result;
 }
 
-function format(aNumber){
+function usd(aNumber){
     return new Intl.NumberFormat("en-US", 
                 { style: "currency"
                     , currency:"USB"
